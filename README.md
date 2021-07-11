@@ -1,4 +1,4 @@
-# Gambatte-Speedrun
+# Gambatte-Speedrun (Non-PSR)
 
 Fork of [Gambatte](https://github.com/sinamas/gambatte) (authored by sinamas), with local changes for Pokémon Speedruns, as well as other speedrunning communities. Under GPLv2.
 
@@ -43,7 +43,7 @@ After completing all the Qt-specific build steps in [INSTALL.md](INSTALL.md), ru
 ```
 $ sh scripts/build_qt.sh
 ```
-To instead build the "non-PSR" version, with additional selectable platforms (GB, GBC, GBA, SGB2), create `gambatte_qt/src/platforms.pri` with the following (before running `build_qt.sh`):
+**This fork builds the "non-PSR" version by default,** with additional selectable platforms (GB, GBC, GBA, SGB2). This is controlled by creating `gambatte_qt/src/platforms.pri` with the following (before running `build_qt.sh`):
 ```
 # platform support
 # GBP is hardcoded
@@ -52,6 +52,9 @@ DEFINES += SHOW_PLATFORM_GBC
 DEFINES += SHOW_PLATFORM_GBA
 DEFINES += SHOW_PLATFORM_SGB
 ```
+To build the "PSR" version, which supports only the Game Boy Player, remove the file `gambatte_qt/src/platforms.pri`.
+
+**Boot ROM verification is disabled in this fork.**  Unlike in PSR's Gambatte-Speedrun, the boot ROMs are not required to match Nintendo's copyrighted boot ROMs bit for bit.  Instead, a free replacement boot ROM such as SameBoot from [SameBoy](https://sameboy.github.io/) may be used, at the possible cost of desynchronizing the random number generator in _Pokémon_ and other games that rely on the `DIV` register.  If you use a replacement boot ROM, make sure to change Settings > Platform to either "Game Boy" or "Game Boy Color", as Gambatte-Speedrun applies patches to the boot ROM in Game Boy Advance or Game Boy Player mode that cause emulation to freeze when applied to SameBoot. (Thanks to CasualPokePlayer in gbdev Discord for helping to troubleshoot this.)
 
 ### Testrunner
 

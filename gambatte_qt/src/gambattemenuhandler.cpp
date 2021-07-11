@@ -35,6 +35,11 @@
 #include <fstream>
 #include <iostream>
 
+// Non-PSR version change by Damian Yerrick, 2021-07-10
+// Do not require a CRC matching Nintendo's copyrighted BIOS
+// #define INFODOTCRC info.crc
+#define INFODOTCRC 0
+
 namespace {
 
 static QString const strippedName(QString const &fullFileName) {
@@ -653,7 +658,7 @@ void GambatteMenuHandler::loadFile(QString const &fileName) {
 
 	QString biosFilename = settings.value(info.key, "").toString();
 	if(biosFilename.isEmpty() ||
-			source_.loadBios(biosFilename.toLocal8Bit().constData(), info.size, info.crc) != 0) {
+			source_.loadBios(biosFilename.toLocal8Bit().constData(), info.size, INFODOTCRC) != 0) {
 		mw_.stop();
 		emit dmgRomLoaded(false);
 		emit romLoaded(false);
@@ -775,7 +780,7 @@ void GambatteMenuHandler::openBios(GambatteBiosInfo const &info) {
 		mw_.stop();
 		emit dmgRomLoaded(false);
 		emit romLoaded(false);
-		int result = source_.loadBios(fileName.toLocal8Bit().constData(), info.size, info.crc);
+		int result = source_.loadBios(fileName.toLocal8Bit().constData(), info.size, INFODOTCRC);
 		if(result != 0) {
 			QMessageBox::critical(
 				&mw_,

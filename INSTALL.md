@@ -107,9 +107,9 @@ $ sudo apt install build-essential git scons zlib1g-dev
 
 ### Qt-specific steps
 
-\- Install Qt5 development packages, plus Gambatte-Speedrun dependencies that aren't bundled with Qt5:
+\- Install Qt5 development packages, plus Gambatte-Speedrun dependencies that aren't bundled with Qt5. (As of Ubuntu 21.04, the [`qt5-default` meta-package has been removed](https://stackoverflow.com/a/67415291/2738262).)
 ```
-$ sudo apt install qt5-default libqt5x11extras5-dev libxrandr-dev libxv-dev libasound2-dev
+$ sudo apt install qtbase5-dev qtchooser qt5-qmake qtbase5-dev-tools libqt5x11extras5-dev libxrandr-dev libxv-dev libasound2-dev
 ```
 
 ### Testrunner-specific steps
